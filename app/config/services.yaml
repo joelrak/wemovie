@@ -7,9 +7,9 @@ parameters:
     moviedb_api:
         key: '%env(API_KEY)%'
         url:
-            base: '%env(string MOVIEDB_API_BASE_URL)%'
-            genre: '%env(string MOVIEDB_API_GENRE_URL)%'
-            best_movie: ''
+            base: '%env(MOVIEDB_API_BASE_URL)%'
+            genre: '%env(MOVIEDB_API_GENRE_URL)%'
+            best_movie: '%env(MOVIEDB_API_BEST_MOVIE_URL)%'
             list_movie_by_genre: ''
             display_movie_detail_info: ''
             search_movie: ''

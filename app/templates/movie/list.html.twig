@@ -1,11 +1,31 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <div> 
-        <ul>
-        {% for genre in movieGenres %}
-            <li>{{ genre.name }}</li>
-        {% endfor %}
-        </ul>    
-    </div>
+    <nav>
+        <div class="row">
+            <div class="col-md-6">A propos de We Movie</div>
+            <div class="col-md-6 pull-right"><input type="search" name="" id=""></div>
+        </div>
+    </nav>
+    <section>
+        <div class="row"><img src="http://placehold.it/250x250" alt="video"></div>
+    </section>
+    <section>
+        <div class="row">
+            <div class="col-md-3">
+                <ul>
+                {% for genre in listGrenres.genres %}
+                    <li><input type="checkbox" name="genre_{{ genre.name }}" id="genre_{{ genre.id }}"><label for="genre_{{ genre.id }}">{{ genre.name }}</label></li>
+                {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-9">
+                {% for item in bestMovies %}
+                    {% if loop.index > 1 %}
+                        <div></div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
 {% endblock %}

@@ -2,29 +2,29 @@
 
 namespace App\Services;
 
-use Symfony\Contracts\HttpClient\HttpClientInterface;
-
 class MovieService
 {
-    private $client;
+    private $clientHelper;
     private $apiParams;
 
-    public function __construct(HttpClientInterface $client, $moviedbApi)
+    public function __construct(ApiClientHelper $helper, $moviedbApi)
     {
         $this->apiParams    = $moviedbApi;
-        $this->client       = $client;
+        $this->clientHelper = $helper;
     }
-    public function listMovieGender(){
-        $uri = sprintf('%s%s?api_key=%s', $this->apiParams['url']['base'], $this->apiParams['url']['genre'], $this->apiParams['key']);
-        $response = $this->client->request(
-            'GET',
-            $uri
-        );
+    
+    public function listMovieGender():object
+    {
+        $uri = $this->apiParams['url']['genre'];
+        $listGenre = $this->clientHelper->getResource($uri);
 
-        $listGenre = [];
-        if($response){
-            $listGenre = json_decode($response->getContent());
-        }
+        return $listGenre;
+    }
+
+    public function listBestMovies($params):object
+    {
+        $uri = $this->apiParams['url']['best_movie'];
+        $listGenre = $this->clientHelper->getResource($uri, $params);
 
         return $listGenre;
     }
