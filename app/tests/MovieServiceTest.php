@@ -8,6 +8,7 @@ class MovieServiceTest extends KernelTestCase
 {
     /**@var MovieService $movieService*/
     private $movieService;
+    
     protected function setUp(): void
     {
         self::bootKernel();
@@ -26,24 +27,41 @@ class MovieServiceTest extends KernelTestCase
     public function testBestMovies()
     {
         $bestMovies = $this->movieService->listBestMovies([]);
-
-        $this->assertIsObject($bestMovies);
-        $this->assertObjectHasAttribute("page", $bestMovies);
-        $this->assertObjectHasAttribute("results", $bestMovies);
-        $this->assertIsArray($bestMovies->results);
-        $this->assertGreaterThanOrEqual(0, $bestMovies->results);
+        
+        $this->assertIsArray($bestMovies);
+        $this->assertIsObject($bestMovies['data']);
+        $this->assertObjectHasAttribute("page", $bestMovies['data']);
+        $this->assertObjectHasAttribute("results", $bestMovies['data']);
+        $this->assertIsArray($bestMovies['data']->results);
+        $this->assertGreaterThanOrEqual(0, $bestMovies['data']->results);
     }
 
-    public function testOneTopRatedMovie(){
+    public function testOneTopRatedMovie()
+    {
         $bestMovies = $this->movieService->listBestMovies(['page' => 1]);
-        $oneTopRated = $bestMovies->results[0];
+        $oneTopRated = $bestMovies['data']->results[0];
 
-        $this->assertIsObject($bestMovies);
-        $this->assertObjectHasAttribute("results", $bestMovies);
+        $this->assertIsArray($bestMovies);
+        $this->assertIsObject($bestMovies['data']);
+        $this->assertObjectHasAttribute("results", $bestMovies['data']);
         $this->assertIsObject($oneTopRated);
         $this->assertObjectHasAttribute('id', $oneTopRated);
         $this->assertObjectHasAttribute('original_title', $oneTopRated);
         $this->assertObjectHasAttribute('title', $oneTopRated);
         $this->assertObjectHasAttribute('poster_path', $oneTopRated);
+    }
+
+    public function testVideoUrlInsideOneTopRatedMovie()
+    {
+        $topRated = $this->movieService->getMovieTopRated();
+
+        $this->assertIsArray($topRated);
+        $this->assertArrayHasKey("detail", $topRated);
+        $this->assertArrayHasKey("video", $topRated);
+        $this->assertIsObject($topRated['detail']);
+        $this->assertGreaterThanOrEqual(0, count($topRated['detail']));
+        $this->assertIsObject($topRated['video']);
+        $this->assertNotEmpty($topRated['videoUrl']);
+
     }
 }

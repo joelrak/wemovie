@@ -13,17 +13,35 @@ class MovieController extends AbstractController
     #[Route('/', name: 'list_movie')]
     public function homeList(MovieService $movieService): Response
     {
+        $listTopRated   = $movieService->listBestMovies(['page' => 1]);
+        $movieTopRated  = $movieService->getMovieTopRated($listTopRated['data']->results[0]->id, 'en_US');
         return $this->render('movie/home.html.twig', [
             'listGrenres'   => $movieService->listMovieGenre(),
-            'bestMovies'    => $movieService->listBestMovies()
+            'bestMovies'    => $movieService->listBestMovies(),
+            'movieTopRated' => $movieTopRated
         ] );
     }
 
-    #[Route('/top_rated', name: 'top_rated_movie')]
-    public function bestMovie(MovieService $movieService): Response
+    #[Route('/images/{movieId}', name: 'images_by_movie')]
+    public function getMovieImages(MovieService $movieService, $movieId)
     {
-        $listTopRated = $movieService->listBestMovies(['page' => 1]);
-        $movieService->getMovieVideos($listTopRated->results[0]->id);
+        //TODO get images from ajax to complete card
+        $images = $movieService->getMovieImages($movieId);
+
+        return $this->json($images);
+    }
+
+    
+    #[Route('/details/{movieId}', name: 'details_of_movie')]
+    public function getMovieDetail(MovieService $movieService, $movieId)
+    {
+        $details = $movieService->getMovieDetails($movieId);
+        return $this->json($details);
+    }
+
+    #[Route('/search', name: 'search_movie')]
+    public function searchMovie(){
+        //TODO launch search inside API TMDB
         return $this->json([]);
     }
 }

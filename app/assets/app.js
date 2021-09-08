@@ -15,12 +15,8 @@ const $ = require('jquery');
 
 require('bootstrap');
 
-$(document).ready(function() {
-    $.ajax({
-        url: $("#top_rated_movies").attr("data-best_movie_url"),
-        method: 'GET',
-        success: (data) => {
-            
-        },
-    });
-});
+$(document).ready(
+    ()=>{
+        console.log('test');
+    }
+);

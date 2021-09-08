@@ -12,8 +12,16 @@ parameters:
             best_movie: '%env(MOVIEDB_API_BEST_MOVIE_URL)%'
             list_movie_by_genre: ''
             display_movie_detail_info: ''
-            search_movie: ''
+            search_movie_by_id: ''
+            discover_movie: '%env(MOVIEDB_API_DISCOVER)%'
             get_videos: '%env(MOVIEDB_API_GET_VIDEOS_URL)%'
+            get_images: '%env(MOVIEDB_API_GET_IMAGES_URL)%'
+        videos:
+            youtube: '%env(VIDEOS_SOURCE_YOUTUBE)%'
+            tmdb: '%env(VIDEOS_SOURCE_TMDB)%'
+        images:
+            600x900: '%env(MOVIEDB_IMAGE_MOVIE_600_900)%'
+            220x330: '%env(MOVIEDB_IMAGE_MOVIE_220_330)%'
 
 services:
     # default configuration for services in *this* file

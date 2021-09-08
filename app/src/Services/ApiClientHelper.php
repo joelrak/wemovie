@@ -2,16 +2,18 @@
 
 namespace App\Services;
 
-use PharIo\Manifest\InvalidUrlException;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+
 
 class ApiClientHelper
 {
     private $client;
     private $apiBaseUrl;
     private $apikey;
-    private $availableUrl;
+    //TODO Serialize and normalize response API to Class or Entity
+    private $normalizer; 
+    private $serializer;
     public function __construct(HttpClientInterface $client, $moviedbApi)
     {
         $this->client       = $client;
@@ -27,7 +29,9 @@ class ApiClientHelper
                 'api_key' => $this->apikey
             ])
         ]);
+
         $data = json_decode($response->getContent());
+        
         if(property_exists($data, 'success') && $data->success === false){
             throw new ResourceNotFoundException($data->status_message);
         }
