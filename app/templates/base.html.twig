@@ -15,7 +15,22 @@
 
 <body>
     <div class="container">
-        {% block body %}{% endblock %}
+        <section>
+            <nav class="navbar navbar-light bg-light justify-content-between">
+                <a class="navbar-brand">A propos de We Movie</a>
+                <div class="col-md-6 pull-right">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">Recherche</button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </section>
+        <div class="content">
+            {% block body %}{% endblock %}
+        </div>
     </div>
 
     {% block javascripts %}

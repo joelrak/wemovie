@@ -33,10 +33,13 @@ $ docker compose exec php-fpm npm install
 ```bash
 $ docker compose exec php-fpm yarn encore dev
 ```
+
 Pour appliquer/compiler les css et js
+
 ```bash
 $ docker compose exec php-fpm npm run build
 ```
+
 ```bash
 $ docker compose exec php-fpm php bin/console assets:install
 ```

@@ -79,4 +79,15 @@ class MovieService
     {
         return [];
     }
+
+    public function searchMovie($searcParams)
+    {
+        $uri    = $this->apiParams['url']['discover_movie'];
+        $movies = $this->clientHelper->getResource($uri, array_merge([
+                "api_key"=> "e5f20fc926600bd83597948e33545b7b",
+                "with_watch_monetization_types" => "flatrate"
+            ], $searcParams)
+        );
+        return $movies;
+    }
 }

@@ -12,7 +12,6 @@ parameters:
             best_movie: '%env(MOVIEDB_API_BEST_MOVIE_URL)%'
             list_movie_by_genre: ''
             display_movie_detail_info: ''
-            search_movie_by_id: ''
             discover_movie: '%env(MOVIEDB_API_DISCOVER)%'
             get_videos: '%env(MOVIEDB_API_GET_VIDEOS_URL)%'
             get_images: '%env(MOVIEDB_API_GET_IMAGES_URL)%'

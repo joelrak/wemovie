@@ -1,17 +1,6 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <nav class="navbar navbar-light bg-light justify-content-between">
-        <a class="navbar-brand">A propos de We Movie</a>
-        <div class="col-md-6 pull-right">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">Recherche</button>
-                </div>
-            </div>
-        </div>
-    </nav>
     <section>
         <div class="row">
             <video width="320" height="240" controls>
@@ -32,16 +21,14 @@
             <div id="top_rated_movies" class="col-md-9">
                 {% for movie in bestMovies.data.results %}
                     <div class="card">
-                        <div class="card-body">
-                            <a href="">
-                                <div class="col-sm-2">
-                                    <img src="{{ bestMovies.base_url ~ movie.poster_path }}" alt="minimal-size">
-                                </div>
-                                <div class="col-sm-8">
-                                    <h5 class="card-title">Special title treatment</h5>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                </div>
-                            </a>
+                        <div class="row card-body">
+                            <div class="col-sm-3">
+                                <img src="{{ bestMovies.base_url ~ movie.poster_path }}" alt="minimal-size">
+                            </div>
+                            <div class="col-sm-8">
+                                <h5 class="card-title">{{ movie.title }}</h5>
+                                <p class="card-text">{{ movie.overview }}</p>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
