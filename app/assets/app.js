@@ -14,9 +14,5 @@ import './bootstrap';
 const $ = require('jquery');
 
 require('bootstrap');
-
-$(document).ready(
-    function(){
-        console.log('test');
-    }
-);
+require('./scripts/request.class')
+require('./scripts/movie')

@@ -1,0 +1,14 @@
+{% for movie in bestMovies.data.results %}
+    <div class="card movie-card bg-light">
+        <div class="row card-body">
+            <div class="col-md-4">
+                <img class="poster-mini" src="{{ bestMovies.base_url ~ movie.poster_path }}" alt="minimal-size">
+            </div>
+            <div class="col-md-8">
+                <h5 class="card-title">{{ movie.title }}</h5>
+                <p class="card-text">{{ movie.overview }}</p>
+                <span class="btn btn-primary btn-read-more-movie pull-right" data-url-detail="{{ path('details_of_movie', {'movieId': movie.id}) }}">read more</span>
+            </div>
+        </div>
+    </div>
+{% endfor %}

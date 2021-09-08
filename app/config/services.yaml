@@ -15,6 +15,7 @@ parameters:
             discover_movie: '%env(MOVIEDB_API_DISCOVER)%'
             get_videos: '%env(MOVIEDB_API_GET_VIDEOS_URL)%'
             get_images: '%env(MOVIEDB_API_GET_IMAGES_URL)%'
+            get_detail: '%env(MOVIEDB_API_GET_DETAIL)%'
         videos:
             youtube: '%env(VIDEOS_SOURCE_YOUTUBE)%'
             tmdb: '%env(VIDEOS_SOURCE_TMDB)%'

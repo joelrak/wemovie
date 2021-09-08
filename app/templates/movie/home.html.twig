@@ -3,9 +3,11 @@
 {% block body %}
     <section>
         <div class="row">
-            <video width="320" height="240" controls>
-                <source src="{{ movieTopRated.videoUrl }}" type="video/mp4">
-            </video>
+            <iframe width="500" height="320" src="{{ movieTopRated.videoUrl }}">
+            </iframe>
+            {# <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="{{ movieTopRated.video.homepage }}" allowfullscreen></iframe>
+            </div> #}
         </div>
     </section>
     <section>
@@ -13,21 +15,22 @@
             <div class="form-check col-md-3">
                 {% for genre in listGrenres.genres %}
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" name="genre_{{ genre.name }}" id="genre_{{ genre.id }}">
+                        <input class="form-check-input check-movie-genre" type="checkbox" value="{{ genre.id }}" name="genre_{{ genre.name }}" id="genre_{{ genre.id }}">
                         <label class="form-check-label" for="genre_{{ genre.id }}">{{ genre.name }}</label>
                     </div>
                 {% endfor %}
             </div>
             <div id="top_rated_movies" class="col-md-9">
                 {% for movie in bestMovies.data.results %}
-                    <div class="card">
+                    <div class="card movie-card bg-light">
                         <div class="row card-body">
-                            <div class="col-sm-3">
-                                <img src="{{ bestMovies.base_url ~ movie.poster_path }}" alt="minimal-size">
+                            <div class="col-md-4">
+                                <img class="poster-mini" src="{{ bestMovies.base_url ~ movie.poster_path }}" alt="minimal-size">
                             </div>
-                            <div class="col-sm-8">
+                            <div class="col-md-8">
                                 <h5 class="card-title">{{ movie.title }}</h5>
                                 <p class="card-text">{{ movie.overview }}</p>
+                                <span class="btn btn-primary btn-read-more-movie pull-right" data-url-detail="{{ path('details_of_movie', {'movieId': movie.id}) }}">read more</span>
                             </div>
                         </div>
                     </div>

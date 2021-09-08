@@ -7,7 +7,8 @@ RUN npm install -g yarn \
     yarn add bootstrap --dev
 
 RUN npm install sass-loader@^9.0.1 node-sass --save-dev \
-    npm i jquery --save
+    npm i jquery --save \
+    yarn add typescript ts-loader@^9.0.0 --dev
 
 # Install PHP extensions
 #RUN docker-php-ext-install pdo_mysql

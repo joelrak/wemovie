@@ -1,2 +1,19 @@
 @import "~bootstrap/scss/bootstrap";
 
+.poster-mini{
+    width: 100px;
+}
+
+.movie-card{
+    margin: 15px 0;
+    cursor: pointer;
+}
+
+.btn-read-more-movie{
+    border-radius: 20px;
+    padding: 4px;
+    :hover{
+        background-color: slategrey;
+        transition: background-color 0.5s ease-in ;
+    }
+}

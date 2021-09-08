@@ -53,9 +53,16 @@ class MovieService
         }
         
         $uri = str_replace('[movie_id]', $bestRated->id, $this->apiParams['url']['get_videos']);
-        $video = $this->clientHelper->getResource($uri, []);
-        $videoUrl = sprintf('%s?key=%s', $this->apiParams['videos']['tmdb'], reset($video->results)->key);
+        $videos = $this->clientHelper->getResource($uri, []);
+        $video = reset($videos->results);
+        $baseUrl = $this->apiParams['videos']['tmdb'];
+        if($video->site === 'YouTube'){
+            $baseUrl = $this->apiParams['videos']['youtube'];
+            $videoUrl = sprintf('%s/%s', $baseUrl, $video->key);
+        }
+        // $videoUrl = sprintf('%s?key=%s', $this->apiParams['videos']['tmdb'], reset($video->results)->key);
         
+        //http://api.themoviedb.org/3/movie/157336?api_key=###&append_to_response=videos
         //TODO if movie has no video, get the image instead of video getMovieImages
 
         //TODO use a class to represent Response
@@ -77,7 +84,10 @@ class MovieService
 
     public function getMovieDetails($movieId)
     {
-        return [];
+        $uri = str_replace('[movie_id]', $movieId, $this->apiParams['url']['get_detail']);
+        $movieDetail = $this->clientHelper->getResource($uri, []);
+
+        return $movieDetail;
     }
 
     public function searchMovie($searcParams)
