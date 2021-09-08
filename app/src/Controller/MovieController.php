@@ -11,10 +11,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class MovieController extends AbstractController
 {
     #[Route('/', name: 'list_movie')]
-    public function index(MovieService $movieService): Response
+    public function homeList(MovieService $movieService): Response
     {
-        return $this->render('movie/list.html.twig', [
-            'listGrenres'   => $movieService->listMovieGender(),
+        return $this->render('movie/home.html.twig', [
+            'listGrenres'   => $movieService->listMovieGenre(),
+            'bestMovies'    => $movieService->listBestMovies()
         ] );
     }
 
@@ -22,6 +23,7 @@ class MovieController extends AbstractController
     public function bestMovie(MovieService $movieService): Response
     {
         $listTopRated = $movieService->listBestMovies(['page' => 1]);
-        return $this->json($listTopRated->results[0]);
+        $movieService->getMovieVideos($listTopRated->results[0]->id);
+        return $this->json([]);
     }
 }

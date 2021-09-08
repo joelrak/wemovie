@@ -13,6 +13,7 @@ parameters:
             list_movie_by_genre: ''
             display_movie_detail_info: ''
             search_movie: ''
+            get_videos: '%env(MOVIEDB_API_GET_VIDEOS_URL)%'
 
 services:
     # default configuration for services in *this* file
