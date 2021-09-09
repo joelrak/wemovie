@@ -1,15 +1,14 @@
 import Request from './request.class'
 
 
-document.addEventListener("DOMContentLoaded",function(){
+document.addEventListener("DOMContentLoaded",()=>{
 
     retrieveAndDisplayMovieDetail();
     searchMoviesByGenre();
 
 });
 
-function retrieveAndDisplayMovieDetail()
-{
+retrieveAndDisplayMovieDetail = () => {
     document.querySelectorAll('.btn-read-more-movie').forEach(item => {
         item.addEventListener('click', event => {
             event.stopPropagation();
@@ -19,8 +18,7 @@ function retrieveAndDisplayMovieDetail()
     });
 }
 
-function searchMoviesByGenre()
-{
+searchMoviesByGenre = () => {
     var searchQuery = localStorage.getItem('searchQuery');
     var genres = searchQuery.split();
     document.querySelectorAll('.check-movie-genre').forEach(item => {
@@ -42,7 +40,7 @@ function searchMoviesByGenre()
 }
 
 
-function sendXhrRequest(method, url, callback)
+sendXhrRequest = (method, url, callback) => 
 {
     var request = new Request();
     var xhr = request.getXhr();
@@ -59,7 +57,7 @@ function sendXhrRequest(method, url, callback)
 }
 
 
-function displayModalFromXhr(dataXhr){
+displayModalFromXhr = (dataXhr) => {
     document.getElementById('movie-modal-title').innerHTML = dataXhr.title;
     document.getElementById('movie-modal-overview').innerHTML = dataXhr.overview;
     document.getElementById('movie-modal-release-date').innerHTML = dataXhr.release_date;
@@ -67,8 +65,7 @@ function displayModalFromXhr(dataXhr){
     movieModal.show();
 }
 
-function reloadMovieListSection(dataXhr)
-{
+reloadMovieListSection = (dataXhr) => {
     var baseUrl     = dataXhr.base_url;
     var data        = dataXhr.data.results;
     var container   = document.getElementById("top_rated_movies");
@@ -79,8 +76,7 @@ function reloadMovieListSection(dataXhr)
     }
 }
 
-function cardTemplate(baseUrl, data)
-{
+cardTemplate = (baseUrl, data) => {
     var card                    = document.createElement("div").setAttribute("class", "card movie-card bg-light");
     var cardBody                = document.createElement("div").setAttribute("class", "row card-body");
     var moviePosterContainer    = document.createElement("div").setAttribute("class", "col-md-4");
