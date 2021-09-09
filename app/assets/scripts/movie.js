@@ -33,18 +33,20 @@ searchMoviesByGenre = () => {
                     delete genres[index];
             }
             localStorage.setItem('searchQuery', genres.join());
-            let url = event.target.getAttribute('data-url');
-            sendXhrRequest('GET', url, reloadMovieListSection);
+            var url = event.target.getAttribute('data-url');
+            var searchUrl = new URL(url);
+            searchUrl.searchParams.set('with_genres', genres.join());
+            sendXhrRequest('GET', searchUrl, reloadMovieListSection);
         });
     });
 }
 
 
-sendXhrRequest = (method, url, callback) => 
+sendXhrRequest = (method, url, callback, async = false) => 
 {
     var request = new Request();
     var xhr = request.getXhr();
-    if(xhr.readyState !== 4){
+    if(async === false && xhr.readyState !== 4){
         xhr.abort();
     }
     xhr.onreadystatechange = () => {
