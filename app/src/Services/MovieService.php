@@ -20,8 +20,8 @@ class MovieService
 
     public function listMovieGenre()
     {
-        $uri = $this->apiParams['url']['genre'];
-        $listGenre = $this->clientHelper->getResource($uri);
+        $uri        = $this->apiParams['url']['genre'];
+        $listGenre  = $this->clientHelper->getResource($uri);
 
         //TODO use a class to represent Response
         return $listGenre;
@@ -29,13 +29,13 @@ class MovieService
 
     public function listBestMovies($params=[])
     {
-        $uri = $this->apiParams['url']['best_movie'];
-        $listGenre = $this->clientHelper->getResource($uri, $params);
+        $uri        = $this->apiParams['url']['best_movie'];
+        $listGenre  = $this->clientHelper->getResource($uri, $params);
 
         //TODO use a class to represent Response
         return [
-            'data' => $listGenre,
-            'base_url' => $this->apiParams['images']['220x330']
+            'data'      => $listGenre,
+            'base_url'  => $this->apiParams['images']['220x330']
         ];
     }
 
@@ -52,13 +52,13 @@ class MovieService
             $bestRated = reset($movies->results);
         }
         
-        $uri = str_replace('[movie_id]', $bestRated->id, $this->apiParams['url']['get_videos']);
-        $videos = $this->clientHelper->getResource($uri, []);
-        $video = reset($videos->results);
-        $baseUrl = $this->apiParams['videos']['tmdb'];
+        $uri        = str_replace('[movie_id]', $bestRated->id, $this->apiParams['url']['get_videos']);
+        $videos     = $this->clientHelper->getResource($uri, []);
+        $video      = reset($videos->results);
+        $baseUrl    = $this->apiParams['videos']['tmdb'];
         if($video->site === 'YouTube'){
-            $baseUrl = $this->apiParams['videos']['youtube'];
-            $videoUrl = sprintf('%s/%s', $baseUrl, $video->key);
+            $baseUrl    = $this->apiParams['videos']['youtube'];
+            $videoUrl   = sprintf('%s/%s', $baseUrl, $video->key);
         }
         // $videoUrl = sprintf('%s?key=%s', $this->apiParams['videos']['tmdb'], reset($video->results)->key);
         
