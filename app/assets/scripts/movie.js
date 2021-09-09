@@ -27,7 +27,7 @@ searchMoviesByGenre = () => {
             var index = genres.indexOf(event.target.value);
             if(this.checked){
                 if(index == -1)
-                    genres.push(event.target.valu);
+                    genres.push(event.target.value);
             }else{
                 if(index != -1)
                     delete genres[index];
