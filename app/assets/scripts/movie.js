@@ -8,33 +8,6 @@ document.addEventListener("DOMContentLoaded",function(){
 
 });
 
-function loadDataForAllElement(elementClass, attributeContainUrl, eventName, callback, optionalParams={}){
-    document.querySelectorAll('.' + elementClass).forEach(item => {
-        item.addEventListener(eventName, event => {
-            event.stopPropagation();
-            let url = event.target.getAttribute(attributeContainUrl);
-            var request = new Request();
-            var xhr = request.getXhr();
-            if(xhr.readyState !== 4){
-                xhr.abort();
-            }
-            xhr.onreadystatechange = () => {
-                if(xhr.readyState === 4){
-                    callback(xhr.response);
-                }
-            }
-            if(optionalParams.searchQuery != undefined){
-                url = url + '&' + optionalParams.searchQuery.join();
-                var genres = optionalParams.searchQuery.split();
-                if(genres.indexOf(event.target.value) != -1)
-                    localStorage.setItem('searchQuery', event.target.value);
-            }
-            xhr.open('GET', url);
-            request.sendRequest();
-        });
-    });
-}
-
 function retrieveAndDisplayMovieDetail()
 {
     document.querySelectorAll('.btn-read-more-movie').forEach(item => {
