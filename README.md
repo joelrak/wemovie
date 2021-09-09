@@ -18,6 +18,7 @@ git clone https://github.com/joelrak/wemovie.git
 
 Initialisation et lancement du projet
 --------------------------------------
+le projet est encore sur la branche develop
 ```bash
 $ docker compose up -d
 ```
